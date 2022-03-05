@@ -1,9 +1,12 @@
+import os
 import discord
 import pandas as pd
 import smtplib,ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import config
+from dotenv import load_dotenv
+
+load_dotenv()
 
 intents = discord.Intents.default()
 intents.members = True
@@ -71,11 +74,11 @@ async def create_invite(message):
     invite = await channel.create_invite(max_uses=1, temporary=True, unique=True, reason="Kerberos")
 
     port=465
-    password= config.gmailpw
+    password= os.getenv("gmailpw")
     context = ssl.create_default_context()
     a = MIMEMultipart("alternative")
     a["Subject"] = "AXLR8R Formula Racing - Discord Invite"
-    a["From"] = config.emailid
+    a["From"] = os.getenv("emailid")
     a["To"] = ""                                         #to email id
 
    # Create the plain-text and HTML version of your message
@@ -103,4 +106,4 @@ async def create_invite(message):
     with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
         server.login("alphaaviral@gmail.com", password)
         server.sendmail("alphaaviral@gmail.com","ph1200687@iitd.ac.in",a.as_string())
-client.run(config.botpw)
+client.run(os.getenv("botpw"))
