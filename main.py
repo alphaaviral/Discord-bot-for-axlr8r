@@ -47,7 +47,7 @@ async def on_message(message):
                 await message.delete(delay = 2)
                 await message.author.edit(nick = names[i])
                 df.at[i, "Discord id (Don't have it? We would suggest you to make one)"] = message.author.name+"#"+message.author.discriminator
-                df.to_csv("Axlr8r Recruitment Form 22' (Responses) - Form responses 1.csv", index=False)
+                df.to_csv("test.csv", index=False)
                 break
 
 @client.event
