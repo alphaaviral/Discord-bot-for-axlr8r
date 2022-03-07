@@ -19,10 +19,12 @@ ids = df["Discord id (Don't have it? We would suggest you to make one)"].tolist(
 names = df["Name"].tolist()
 entrynos = df["Entry Number"].tolist()
 groups = df["Groups"].tolist()
+self = client.get_user(760079854501756939)
 # print(df)
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+    await self.send(content="Bot online")
 
 @client.event
 async def on_message(message):
@@ -66,6 +68,7 @@ async def on_message(message):
                 await message.author.send(content = "You entered an invalid entry number (You did not fill the form floated after the main orientation :). Contact a mod for more info!)")
         except:
             print("Error")
+            await self.send(content="AN ERROR OCCURED https://dashboard.heroku.com/apps/axlr8r-bot/logs")
 
 @client.event
 async def on_member_join(member):
@@ -87,6 +90,7 @@ async def on_member_join(member):
                          
     except:
         print("error")
+        await self.send(content="AN ERROR OCCURED https://dashboard.heroku.com/apps/axlr8r-bot/logs")
 # async def create_invite(message):
 #     guild = message.guild
 #     channel = guild.get_channel(947579944920313870)
